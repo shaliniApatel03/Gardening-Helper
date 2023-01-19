@@ -12,7 +12,7 @@ Login Page with usernames
 -Plant compatibility  
 -Soil and nutrient recommendations  
 
-#Members/Project Roles  
+# Members/Project Roles  
 Sarabeth Cash - Front End  
 Naser Ashraf - Front End  
 Shalini Patel - Back End  
