@@ -1,7 +1,7 @@
 # Gardening-Helper
 
-**# Description**  
-The Garden Helper application will help users track the progress of their plants providing a better yield. The application will also allow users to one stop shop all their gardening needs. As users continue to add to the application, there will be endless amounts of data to ensure your plants get the care they need.  
+Description:
+"Gardening Helper" is the ultimate gardening companion for green thumbs and beginners alike. Keep track of your plants and their progress with the "My Garden" page, and never miss a planting or harvesting date with the "Alerts" page. The "All Plants" page functions as a searchable database of plants, and the "Purchase" page links you to the best seeds and gardening products. The "Plant Tracker" allows you to upload images and notes about your plants' growth, and "Season Tracker" sends you push notifications or emails to remind you when it's planting season for your favorite plants. The "Pet Safe" feature ensures your furry friends stay safe while you garden, "Plant Compatibility" helps you plan your garden and "Soil and Nutrient Recommendations" helps you give your plants the best care. With "Gardening Helper", you'll have a beautiful and thriving garden in no time.
   
 Login Page with usernames  
 -“Alerts” page that fills with notifications on when to plant, harvest, etc  
