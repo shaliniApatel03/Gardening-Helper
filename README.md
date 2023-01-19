@@ -1,11 +1,6 @@
 # Gardening-Helper
 Read Me:
 
-# Project Gardening-Helper
-
-# Description
-
-
 Login Page with usernames
 -“Alerts” page that fills with notifications on when to plant, harvest, etc
 -“My Garden” Page with list of plants and user added plant attributes
