@@ -1,7 +1,7 @@
 # Gardening-Helper
 Read Me:
 
-Login Page with usernames
+Login Page with usernames  
 -“Alerts” page that fills with notifications on when to plant, harvest, etc  
 -“My Garden” Page with list of plants and user added plant attributes  
 -“All Plants” Page that functions as a plant database where you can search for plants, and add to garden as needed  
