@@ -47,8 +47,9 @@ func main() {
 		fmt.Println("1. Search for a plant")
 		fmt.Println("2. Add a plant to the garden")
 		fmt.Println("3. Edit a plant in the garden")
-		fmt.Println("4. Would you like to plant veggies in the garden? ")
-		fmt.Println("5. Exit")
+		fmt.Println("4. View my plants")
+		fmt.Println("5. Would you like to plant veggies in the garden? ")
+		fmt.Println("6. Exit")
 		fmt.Println()
 
 		fmt.Print("Enter your choice: ")
@@ -65,8 +66,10 @@ func main() {
 		case "3":
 			editPlant()
 		case "4":
-			vegetablePlant()
+			viewMyPlants()
 		case "5":
+			vegetablePlant()
+		case "6":
 			fmt.Println()
 			fmt.Println("Thank you for taking the time to search through 100,000 plants to find the one you were looking for!")
 			fmt.Println()
@@ -137,6 +140,7 @@ func searchPlant() {
 		fmt.Printf("Is Vegetable: %t\n", plant.Vegetable)
 
 	}
+	// Prompt the user to add the plant to their garden
 	fmt.Println("Would you like to add any of these plants to your garden? (yes/no)")
 	bufio.NewReader(os.Stdin)
 	addPlantChoice, _ := reader.ReadString('\n')
@@ -159,6 +163,13 @@ func searchPlant() {
 		}
 
 		if foundPlant {
+			// Save the plant to the file
+			if err := savePlant(selectedPlant); err != nil {
+				fmt.Println("Error saving plant:", err)
+				return
+			}
+
+			// Add the plant to the garden map
 			Garden[selectedPlant.CommonName] = Plant{
 				CommonName:  selectedPlant.CommonName,
 				Description: selectedPlant.Description,
@@ -281,6 +292,74 @@ func vegetablePlant() {
 
 		if !found {
 			fmt.Println("Sorry, the vegetable you entered was not found in the database.")
+		}
+	}
+}
+
+func savePlant(plant Plant) error {
+	// Open the file for appending
+	file, err := os.OpenFile("garden.json", os.O_APPEND|os.O_CREATE|os.O_WRONLY, 0644)
+	if err != nil {
+		return err
+	}
+	defer file.Close()
+
+	// Encode the plant as JSON and write it to the file
+	encoder := json.NewEncoder(file)
+	if err := encoder.Encode(plant); err != nil {
+		return err
+	}
+
+	return nil
+}
+
+func retrieveMyPlants() ([]Plant, error) {
+	var plants []Plant
+
+	// Open the file for reading
+	file, err := os.Open("garden.json")
+	if err != nil {
+		return nil, err
+	}
+	defer file.Close()
+
+	// Decode the file contents as JSON and append the plants to the slice
+	decoder := json.NewDecoder(file)
+	for decoder.More() {
+		var plant Plant
+		if err := decoder.Decode(&plant); err != nil {
+			return nil, err
+		}
+		plants = append(plants, plant)
+	}
+
+	return plants, nil
+}
+
+func viewMyPlants() {
+	// Retrieve all plants added by the current user from the database or file
+	myPlants, err := retrieveMyPlants()
+	if err != nil {
+		fmt.Println("Error retrieving plants:", err)
+		return
+	}
+
+	if len(myPlants) == 0 {
+		fmt.Println("You haven't added any plants yet.")
+	} else {
+		fmt.Println("Your plants:")
+		for _, plant := range myPlants {
+			//fmt.Printf("- %s (%s):\n", plant.Name, plant.Species)
+			fmt.Printf("  Common name: %s\n", plant.CommonName)
+			fmt.Printf("  Slug: %s\n", plant.Slug)
+			fmt.Printf("  Scientific name: %s\n", plant.ScientificName)
+			fmt.Printf("  Description: %s\n", plant.Description)
+			fmt.Printf("  Genus: %s\n", plant.Genus)
+			fmt.Printf("  Family common name: %s\n", plant.FamilyCommonName)
+			fmt.Printf("  Is vegetable: %t\n", plant.Vegetable)
+			fmt.Printf("  Rank: %s\n", plant.Rank)
+			fmt.Printf("  Observation: %s\n", plant.Observation)
+			fmt.Println()
 		}
 	}
 }
