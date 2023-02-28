@@ -11,7 +11,6 @@ import (
 	"strings"
 )
 
-// Plant is a struct that represents a plant in Trefle API
 type Plant struct {
 	CommonName     string `json:"common_name"`
 	Slug           string `json:"slug"`
@@ -25,26 +24,6 @@ type Plant struct {
 	Vegetable        bool   `json:"vegetable"`
 	Genus            string `json:"genus"`
 	Family           string `json:"family"`
-	/*CommonName      struct {
-		En  []string `json:"en"`
-		Eng []string `json:"eng"`
-	} `json:"common_name"`
-	/*Distribution struct {
-		Native     []string `json:"native"`
-		Introduced []string `json:"introduced"`
-	} `json:"distribution"`
-
-	/*FruitOrSeed struct {
-		Conspicuous     string `json:"conspicuous"`
-		Color           string `json:"color"`
-		Shape           string `json:"shape"`
-		SeedPersistence string `json:"seed_persistence"`
-	} `json: "fruit_or_seed"`
-
-	Flower struct {
-		Color       string `json:"color"`
-		Conspicuous string `json:"conspicuous"`
-	} `json: "flower"`*/
 }
 
 // PlantsResponse is a struct that represents the response from the Trefle API
@@ -151,23 +130,12 @@ func searchPlant() {
 		fmt.Printf("Slug: %s\n", plant.Slug)
 		fmt.Printf("Rank: %s\n", plant.Rank)
 		fmt.Println("Description: ", plant.Description)
-		/*if plant.FamilyCommonName != "" {
-			fmt.Printf("Family Common Name: %s\n", plant.FamilyCommonName)
-		} else {
-			fmt.Println("Family Common Name: None/ We couldn't find the information")
-		}*/
+
 		fmt.Println("Family common name: ", plant.FamilyCommonName)
 
 		fmt.Printf("Observation: %s\n", plant.Observation)
 		fmt.Printf("Is Vegetable: %t\n", plant.Vegetable)
-		/*fmt.Printf("Distribution (Native): %s\n", plant.Distribution.Native)
-		fmt.Printf("Distribution (Introduced): %s\n", plant.Distribution.Introduced)
-		/*	fmt.Printf("Flower Color: %s\n", plant.Flower.Color)
-			fmt.Printf("Flower Conspicuous: %s\n", plant.Flower.Conspicuous)
-			fmt.Printf("Seed Color: %s\n", plant.FruitOrSeed.Color)
-			fmt.Printf("Seed Shape: %s\n", plant.FruitOrSeed.Shape)
-			fmt.Printf("Seed Persistence: %s\n", plant.FruitOrSeed.SeedPersistence)
-		*/
+
 	}
 	fmt.Println("Would you like to add any of these plants to your garden? (yes/no)")
 	bufio.NewReader(os.Stdin)
